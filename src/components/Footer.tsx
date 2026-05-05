@@ -1,4 +1,6 @@
-import { Github, Instagram, Twitter, Zap } from 'lucide-react';
+import { Zap } from 'lucide-react';
+import { RiFacebookLine, RiGithubLine, RiLinkedinLine } from "react-icons/ri";
+
 import { Link } from 'react-router-dom';
 
 const footerLinks = {
@@ -20,9 +22,9 @@ const footerLinks = {
 };
 
 const socials = [
-  { icon: Github, label: 'GitHub', href: '#' },
-  { icon: Twitter, label: 'Twitter / X', href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
+  { icon: RiGithubLine, label: 'GitHub', href: 'https://github.com/codelikeagirl29' },
+  { icon: RiLinkedinLine, label: 'LinkedIn', href: 'https://linkedin.com/in/lindsey-howard' },
+  { icon: RiFacebookLine, label: 'Facebook', href: 'https://www.facebook.com/codelikeagirl91' },
 ];
 
 export default function Footer() {
@@ -39,7 +41,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-[hsl(var(--nova-muted))] leading-relaxed max-w-xs">
-              Premium goods for the discerning future. Quiet luxury meets cyberpunk precision.
+              Defining the new standard for modern living by offering high-quality essentials designed to elevate your daily routine
             </p>
             <div className="flex items-center gap-3 pt-2">
               {socials.map(({ icon: Icon, label, href }) => (
@@ -82,7 +84,7 @@ export default function Footer() {
       <div className="border-t border-[hsl(var(--nova-border))]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-[hsl(var(--nova-muted))]">
-            &copy; 2026 NovaGoods. All rights reserved.
+            &copy; 2026 NovaGoods. All rights reserved. | Made by lindseykdev
           </p>
           <div className="flex items-center gap-6">
             <Link to="/about" className="text-xs text-[hsl(var(--nova-muted))] hover:text-[hsl(var(--nova-text))] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--nova-blue))] rounded-sm">
