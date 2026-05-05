@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nova-bg: 222 25% 12%;
+    /* Lighter Navy-Grey (was 4% brightness) */
+    --nova-surface: 222 20% 16%;
+    /* Lighter surface for cards */
+    --nova-border: 222 15% 25%;
+    /* More visible borders */
+    --nova-text: 210 20% 98%;
+    --nova-muted: 217 12% 64%;
+
+    /* THE NEW BLUE: Electric Sapphire */
+    --nova-blue: 221 83% 53%;
+    /* #2563EB - Electric Blue */
+    --nova-cyan: 221 83% 53%;
+    /* Legacy alias to prevent breaking components */
+    --nova-violet: 250 84% 65%;
+    /* Deep royal violet */
+
+    /* Radix / shadcn compat tokens */
+    --background: 222 25% 12%;
+    --foreground: 210 20% 98%;
+    --card: 222 39% 7%;
+    --card-foreground: 210 20% 98%;
+    --popover: 222 39% 7%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 222 20% 16%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 20% 16%;
+    --muted-foreground: 217 12% 60%;
+    --accent: 250 84% 65%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 222 20% 16%;
+    --input: 222 20% 16%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+    /* Slightly softer for luxury feel */
+
+    /* Updated Shadows for deep navy background */
+    --shadow-2xs: 0 1px 3px 0px hsl(222 50% 2% / 0.5);
+    --shadow-xs: 0 1px 3px 0px hsl(222 50% 2% / 0.5);
+    --shadow-sm: 0 1px 2px 0px hsl(222 50% 5% / 0.3);
+    --shadow-md: 0 4px 12px -2px hsl(222 50% 5% / 0.4);
+    --shadow-lg: 0 12px 24px -4px hsl(222 50% 5% / 0.5);
+    --shadow-xl: 0 20px 25px -5px hsl(222 50% 2% / 0.8), 0 8px 10px -6px hsl(222 50% 2% / 0.8);
+    --shadow-2xl: 0 25px 50px -12px hsl(222 50% 2% / 0.9);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-[hsl(var(--nova-bg))] text-[hsl(var(--nova-text))] font-sans antialiased;
+    /* Increased the opacity of the top glow since the background is lighter */
+    background-image: radial-gradient(circle at 50% -10%, hsl(var(--nova-blue) / 0.15), transparent 60%);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: hsl(var(--nova-blue) / 0.4);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--nova-blue));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
