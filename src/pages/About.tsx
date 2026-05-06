@@ -1,25 +1,25 @@
-import { motion } from 'framer-motion';
-import { Globe, Target, Zap } from 'lucide-react';
-import PageLayout from '../components/PageLayout';
+import { motion } from "framer-motion";
+import { Globe, Target, Zap, Code, ShieldCheck, MapPin } from "lucide-react";
+import PageLayout from "../components/PageLayout";
 
 const values = [
   {
     icon: Zap,
-    title: 'Precision Over Volume',
+    title: "Precision Over Volume",
     description:
-      'We curate fewer products with greater intention. Every item in our catalog has earned its place through rigorous quality evaluation.',
+      "We curate fewer products with greater intention. Every item in our catalog has earned its place through rigorous quality evaluation.",
   },
   {
     icon: Target,
-    title: 'Purposeful Design',
+    title: "Purposeful Design",
     description:
-      'Form follows function, but never at the expense of beauty. Our products exist at the intersection of utility and aesthetic mastery.',
+      "Form follows function, but never at the expense of beauty. Our products exist at the intersection of utility and aesthetic mastery.",
   },
   {
     icon: Globe,
-    title: 'Responsible Sourcing',
+    title: "Responsible Sourcing",
     description:
-      'We partner exclusively with manufacturers who share our commitment to ethical labor practices and environmental stewardship.',
+      "We partner exclusively with manufacturers who share our commitment to ethical labor practices and environmental stewardship.",
   },
 ];
 
@@ -28,7 +28,10 @@ export default function About() {
     <PageLayout>
       {/* Hero */}
       <section className="relative py-24 overflow-hidden border-b border-[hsl(var(--nova-border))] bg-[hsl(var(--nova-surface))]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_-20%,hsl(var(--nova-blue)/0.08),transparent)]" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_-20%,hsl(var(--nova-blue)/0.08),transparent)]"
+          aria-hidden="true"
+        />
         <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -37,37 +40,69 @@ export default function About() {
             className="space-y-6"
           >
             <p className="text-xs uppercase tracking-widest text-[hsl(var(--nova-blue))] font-semibold">
-              Our Story
+              The Nova Vision
             </p>
             <h1 className="font-heading text-4xl lg:text-6xl font-bold text-[hsl(var(--nova-text))] leading-tight">
-              Built on the belief that{' '}
+              Where{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[hsl(var(--nova-blue))] to-[hsl(var(--nova-violet))]">
-                less is more
+                Tech meets Tactile
               </span>
             </h1>
             <p className="text-[hsl(var(--nova-muted))] text-lg max-w-2xl mx-auto leading-relaxed">
-              Nova Goods was founded in 2021 by a team of designers and engineers who were tired of compromise. We set out to build a store where every product is worth owning.
+              Founded in Okaloosa County, Nova Goods was born from a passion for
+              clean code and high-end real estate. We bridge the gap between
+              digital precision and physical durability.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Image */}
-      <section className="py-16">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      {/* Narrative Section */}
+      <section className="py-20 bg-[hsl(var(--nova-bg))]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-3 text-[hsl(var(--nova-blue))]">
+              <Code size={20} />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                The Developer's Mindset
+              </span>
+            </div>
+            <h2 className="text-3xl font-bold text-[hsl(var(--nova-text))]">
+              Curated for the Modern Professional
+            </h2>
+            <p className="text-[hsl(var(--nova-muted))] leading-relaxed">
+              As developers and designers, we spend our lives seeking the{" "}
+              <span className="font-bold text-[hsl(var(--nova-blue))]">
+                perfect setup
+              </span>
+              . Nova Goods is our way of sharing those discoveries. Whether it's
+              a precision-milled pen or a liquid-cooled battlestation, every
+              item is selected to enhance your workflow and environment.
+            </p>
+            <div className="flex items-center gap-3 text-[hsl(var(--nova-violet))]">
+              <ShieldCheck size={20} />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                Florida Licensed & Verified
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="rounded-2xl overflow-hidden border border-[hsl(var(--nova-border))] aspect-[16/7]"
+            className="relative"
           >
+            <div className="absolute -inset-4 bg-gradient-to-r from-[hsl(var(--nova-blue))/0.2] to-[hsl(var(--nova-violet))/0.2] blur-2xl rounded-full" />
             <img
               src="https://xtxsjngmweipiatfbjpr.supabase.co/storage/v1/object/public/products/about-photo.jpg"
-              alt="Nova Goods studio workspace with precision tools and products"
-              width={1200}
-              height={525}
-              className="w-full h-full object-cover"
+              alt="Nova studio environment"
+              className="relative rounded-2xl border border-[hsl(var(--nova-border))] shadow-2xl"
             />
           </motion.div>
         </div>
@@ -80,14 +115,13 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
             className="text-center mb-12"
           >
             <p className="text-xs uppercase tracking-widest text-[hsl(var(--nova-blue))] font-semibold mb-3">
-              What We Stand For
+              Built Different
             </p>
             <h2 className="font-heading text-3xl font-bold text-[hsl(var(--nova-text))]">
-              Our Values
+              Our Core Principles
             </h2>
           </motion.div>
 
@@ -117,14 +151,14 @@ export default function About() {
       </section>
 
       {/* Stats */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center mb-16">
             {[
-              { value: '2021', label: 'Founded' },
-              { value: '10K+', label: 'Customers' },
-              { value: '100%', label: 'Satisfaction' },
-              { value: '48h', label: 'Avg. Delivery' },
+              { value: "24/7", label: "Support" },
+              { value: "850+", label: "Curated Items" },
+              { value: "5-Star", label: "Reviews" },
+              { value: "Panhandle", label: "Founded" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -132,15 +166,47 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.4 }}
+                className="relative p-6 group cursor-default"
               >
-                <p className="font-heading text-3xl font-bold text-[hsl(var(--nova-blue))]">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-[hsl(var(--nova-muted))] mt-1 uppercase tracking-wider font-medium">
-                  {stat.label}
-                </p>
+                {/* The Animated Border SVG */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                >
+                  <motion.rect
+                    x="0"
+                    y="0"
+                    width="100"
+                    height="100"
+                    rx="12" // Matches your card's rounded corners
+                    fill="transparent"
+                    stroke="hsl(var(--nova-blue))"
+                    strokeWidth="4"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileHover={{
+                      pathLength: 1,
+                      opacity: 1,
+                      transition: { duration: 0.8, ease: "easeInOut" },
+                    }}
+                    style={{ pathSpacing: 0 }}
+                  />
+                </svg>
+                <div className="relative z-10">
+                  <p className="font-heading text-3xl font-bold text-[hsl(var(--nova-blue))] transition-transform duration-300 group-hover:scale-110">
+                    {stat.value}
+                  </p>
+                  <p className="text-xs text-[hsl(var(--nova-muted))] mt-1 uppercase tracking-wider font-medium">
+                    {stat.label}
+                  </p>
+                </div>
               </motion.div>
             ))}
+          </div>
+
+          <div className="flex items-center gap-2 text-[hsl(var(--nova-muted))] text-[10px] uppercase tracking-[0.3em] font-bold">
+            <MapPin size={12} className="text-[hsl(var(--nova-blue))]" />
+            Pensacola • Destin • Panama City
           </div>
         </div>
       </section>

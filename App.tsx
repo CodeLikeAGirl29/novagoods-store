@@ -8,6 +8,7 @@ import './styles.css';
 
 import Home from './src/pages/Home';
 import NotFound from './src/pages/NotFound';
+import CollectionDetail from './src/pages/CollectionDetail';
 
 const Shop = lazy(() => import('./src/pages/Shop'));
 const ProductDetails = lazy(() => import('./src/pages/ProductDetails'));
@@ -30,9 +31,9 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/collections" element={<Collections />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/collections/:categoryName" element={<CollectionDetail />} />
+            <Route path="/product/:id" element={<ProductDetails />} />            <Route path="/about" element={<About />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="*" element={<NotFound />} />
