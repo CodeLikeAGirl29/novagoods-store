@@ -23,27 +23,33 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        // Use the API utility to support production URLs
-        const data = await api.getProductById(id!); 
+useEffect(() => {
+  const fetchProduct = async () => {
+    if (!id) return;
+    try {
+      setLoading(true);
+      const data = await api.getProductById(id);
 
-        setProduct({
-          ...data,
-          imageUrl: data.image_url || data.imageUrl,
-          price: typeof data.price === 'string' ? parseFloat(data.price) : data.price
-        });
-      } catch (err) {
-        console.error("System sync failed:", err);
+      if (!data) {
         setProduct(null);
-      } finally {
-        setLoading(false);
+        return;
       }
-    };
+      // Map Supabase snake_case to your CamelCase interface
+      setProduct({
+        ...data,
+        imageUrl: data.image_url || data.imageUrl, // Fix naming mismatch
+        price: typeof data.price === 'string' ? parseFloat(data.price) : data.price
+      });
+    } catch (err) {
+      console.error("System sync failed:", err);
+      setProduct(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    if (id) fetchProduct();
-  }, [id]);
+  fetchProduct();
+}, [id]);
 
   const handleAdd = () => {
     if (product) {

@@ -7,9 +7,18 @@ export const api = {
     return res.json();
   },
 
+  async getProductById(id: string) {
+    const res = await fetch(`${BASE_URL}/products/${id}`);
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.message || "Product not found");
+    }
+    return res.json();
+  },
+
   // Auth
   login: async (credentials: any) => {
-    const res = await fetch(`${API_BASE}/users/login`, {
+    const res = await fetch(`${BASE_URL}/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
