@@ -26,13 +26,9 @@ export default function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // Use the full URL if your backend is on 5000 and frontend on 5173
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
-        if (!res.ok) throw new Error("Product not found");
+        // Use the API utility to support production URLs
+        const data = await api.getProductById(id!); 
 
-        const data = await res.json();
-
-        // Normalize data: ensure price is a number and image key matches
         setProduct({
           ...data,
           imageUrl: data.image_url || data.imageUrl,
@@ -68,7 +64,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[hsl(var(--nova-bg))] text-white font-mono p-4 text-center">
-        <p className="text-[hsl(var(--nova-blue))] mb-4">SYSTEM_ERROR: NULL_REFERENCE</p>
+        <p className="text-[hsl(var(--nova-blue))] mb-4">SYSTEM ERROR: INCORRECT PRODUCT REFERENCE.. TRY AGAIN LATER</p>
         <h1 className="text-2xl font-bold mb-8 uppercase tracking-tighter">Product Data Not Found</h1>
         <Link to="/shop" className="px-6 py-3 border border-[hsl(var(--nova-border))] rounded-xl hover:bg-[hsl(var(--nova-blue))] hover:text-black transition-all">
           Return to Collection
