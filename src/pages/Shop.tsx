@@ -32,7 +32,7 @@ export default function Shop() {
           ...p,
           // Handle cases where database might return null or unexpected formats
           imageUrl: p.image_url || p.imageUrl,
-          price: typeof p.price === 'string' ? parseFloat(p.price) : p.price
+          price: typeof p.price === 'string' ? parseFloat(p.price) : Number(p.price)
         }));
 
         setDbProducts(mappedData);
@@ -93,20 +93,21 @@ export default function Shop() {
       <section className="sticky top-16 z-30 bg-[hsl(var(--nova-bg))]/95 backdrop-blur-md border-b border-[hsl(var(--nova-border))] py-4">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
           {/* Category Pills */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--nova-blue))] ${activeCategory === cat
-                  ? 'bg-[hsl(var(--nova-blue))] text-[hsl(var(--nova-bg))]'
-                  : 'border border-[hsl(var(--nova-border))] text-[hsl(var(--nova-muted))] hover:border-[hsl(var(--nova-blue))]/40 hover:text-[hsl(var(--nova-text))]'
-                  }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+<div className="flex items-center gap-2 flex-wrap">
+  {categories.map((cat) => (
+    <button
+      key={cat}
+      onClick={() => setActiveCategory(cat)}
+      className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--nova-blue))] ${
+        activeCategory === cat
+          ? 'bg-[hsl(var(--nova-blue))] text-white shadow-[0_0_15px_rgba(37,99,235,0.4)]' 
+          : 'border border-[hsl(var(--nova-border))] text-[hsl(var(--nova-text))] bg-[hsl(var(--nova-surface))] hover:border-[hsl(var(--nova-blue))] hover:text-white'
+      }`}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
 
           {/* Search + Sort */}
           <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -137,36 +138,44 @@ export default function Shop() {
         </div>
       </section>
 
-      {/* Product Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {filtered.length === 0 ? (
-            <div className="text-center py-24">
-              <p className="text-[hsl(var(--nova-muted))] text-lg font-medium">No products found.</p>
-              <p className="text-[hsl(var(--nova-muted))] text-sm mt-2">Try adjusting your filters or search term.</p>
-            </div>
-          ) : (
-            <>
-              <p className="text-xs text-[hsl(var(--nova-muted))] mb-6">
-                Showing {filtered.length} product{filtered.length !== 1 ? 's' : ''}
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                {filtered.map((product, i) => (
-                  <motion.div
-                    key={product.id}
-                    custom={i}
-                    variants={fadeUp}
-                    initial="hidden"
-                    animate="visible"
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                ))}
-              </div>
-            </>
-          )}
+    {/* Product Grid */}
+<section className="py-12">
+  <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    {loading ? (
+      /* Loading State */
+      <div className="flex flex-col items-center justify-center py-32">
+        <div className="w-8 h-8 border-2 border-[hsl(var(--nova-blue))/0.3] border-t-[hsl(var(--nova-blue))] rounded-full animate-spin mb-4" />
+        <p className="text-[hsl(var(--nova-muted))] text-sm animate-pulse">Initializing Collection...</p>
+      </div>
+    ) : filtered.length === 0 ? (
+      /* Empty State */
+      <div className="text-center py-24">
+        <p className="text-[hsl(var(--nova-muted))] text-lg font-medium">No products found.</p>
+        <p className="text-[hsl(var(--nova-muted))] text-sm mt-2">Try adjusting your filters or search term.</p>
+      </div>
+    ) : (
+      /* Success State */
+      <>
+        <p className="text-xs text-[hsl(var(--nova-muted))] mb-6">
+          Showing {filtered.length} product{filtered.length !== 1 ? 's' : ''}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+          {filtered.map((product, i) => (
+            <motion.div
+              key={product.id}
+              custom={i}
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
+              <ProductCard product={product} />
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </>
+    )}
+  </div>
+</section>
     </PageLayout>
   );
 }

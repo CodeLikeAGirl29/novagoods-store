@@ -11,8 +11,9 @@ const PORT = process.env.PORT || 5000;
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://novagoods-store.vercel.app'
-  ]
+    'https://novagoods-store.vercel.app',
+    process.env.FRONTEND_URL
+  ].filter(Boolean) 
 }));
 
 app.use(express.json());
