@@ -63,7 +63,7 @@ export default function About() {
             className="rounded-2xl overflow-hidden border border-[hsl(var(--nova-border))] aspect-[16/7]"
           >
             <img
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=525&fit=crop"
+              src="https://xtxsjngmweipiatfbjpr.supabase.co/storage/v1/object/public/products/about-photo.jpg"
               alt="Nova Goods studio workspace with precision tools and products"
               width={1200}
               height={525}

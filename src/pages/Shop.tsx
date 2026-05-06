@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import PageLayout from '../components/PageLayout';
 import ProductCard from '../components/ProductCard';
 import { categories, products } from '../data/products';
+import { api } from '../lib/api';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -19,22 +20,30 @@ export default function Shop() {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState<'default' | 'price-asc' | 'price-desc'>('default');
   const [dbProducts, setDbProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/products');
-        const data = await res.json();
-        const mapped = data.map((p: any) => ({
+        // Use the utility instead of hardcoded fetch
+        const data = await api.getProducts();
+
+        const mappedData = data.map((p: any) => ({
           ...p,
+          // Handle cases where database might return null or unexpected formats
           imageUrl: p.image_url || p.imageUrl,
-          price: parseFloat(p.price)
+          price: typeof p.price === 'string' ? parseFloat(p.price) : p.price
         }));
-        setDbProducts(mapped);
-      } catch (err) {
-        console.error("Failed to sync with system:", err);
+
+        setDbProducts(mappedData);
+      } catch (error) {
+        console.error('API Error:', error);
+        // If the API fails, dbProducts remains empty, triggering the fallback automatically
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchProducts();
   }, []);
 

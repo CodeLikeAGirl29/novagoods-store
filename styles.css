@@ -48,6 +48,10 @@
     --radius: 0.75rem;
     /* Slightly softer for luxury feel */
 
+    --nova-text-shadow: hsl(var(--nova-blue) / 0.8);
+    --nova-text-highlight: hsl(var(--nova-blue) / 0.4);
+    --nova-white-highlight: hsla(210, 20%, 98%, 0.6);
+
     /* Updated Shadows for deep navy background */
     --shadow-2xs: 0 1px 3px 0px hsl(222 50% 2% / 0.5);
     --shadow-xs: 0 1px 3px 0px hsl(222 50% 2% / 0.5);
@@ -88,6 +92,14 @@
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .heading-sapphire-glow {
+    /* The 0.15ch creates the soft drop shadow below */
+    /* The -2px creates the 'inner' light source at the top */
+    text-shadow:
+      0 0.15ch 15px var(--nova-text-shadow),
+      0 -2px 0 var(--nova-white-highlight);
   }
 
   @keyframes fadeIn {

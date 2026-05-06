@@ -1,10 +1,9 @@
-const API_BASE = import.meta.env.VITE_API_URL;
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 export const api = {
-  // Products
-  getProducts: async () => {
-    const res = await fetch(`${API_BASE}/products`);
-    if (!res.ok) throw new Error('Failed to fetch products');
+  async getProducts() {
+    const res = await fetch(`${BASE_URL}/products`);
+    if (!res.ok) throw new Error('Backend offline');
     return res.json();
   },
 
