@@ -1,43 +1,52 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, Layers, Layout, Cpu, Watch, Headphones, Monitor } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { categories, products } from '../data/products';
-import PageLayout from '../components/PageLayout';
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Layout,
+  Cpu,
+  Watch,
+  Headphones,
+  Monitor,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import { categories, products } from "../data/products";
+import PageLayout from "../components/PageLayout";
 
 // Helper to provide specific icons/descriptions for your dynamic categories
 const getCategoryMeta = (category: string) => {
   const meta: Record<string, { subtitle: string; desc: string; icon: any }> = {
-    'Watches': { 
-      subtitle: 'Precision Timing', 
-      desc: 'High-end chronographs and smart-rings engineered with sapphire glass.', 
-      icon: Watch 
+    Watches: {
+      subtitle: "Precision Timing",
+      desc: "High-end chronographs and smart-rings engineered with sapphire glass.",
+      icon: Watch,
     },
-    'Audio': { 
-      subtitle: 'Sonic Purity', 
-      desc: 'Studio-grade acoustics and spatial audio delivery systems.', 
-      icon: Headphones 
+    Audio: {
+      subtitle: "Sonic Purity",
+      desc: "Studio-grade acoustics and spatial audio delivery systems.",
+      icon: Headphones,
     },
-    'Gaming Bundles': { 
-      subtitle: 'Complete Ecosystems', 
-      desc: 'The ultimate zenith battlestations. From liquid-cooled PCs to ergonomic seating.', 
-      icon: Monitor 
+    "Gaming Bundles": {
+      subtitle: "Complete Ecosystems",
+      desc: "The ultimate zenith battlestations. From liquid-cooled PCs to ergonomic seating.",
+      icon: Monitor,
     },
-    'Home': { 
-      subtitle: 'Architectural Objects', 
-      desc: 'Minimalist forms and thermal-retention ceramics for the modern dwelling.', 
-      icon: Layout 
-    }
+    Home: {
+      subtitle: "Architectural Objects",
+      desc: "Minimalist forms and thermal-retention ceramics for the modern dwelling.",
+      icon: Layout,
+    },
   };
 
-  return meta[category] || { 
-    subtitle: 'Nova Systems', 
-    desc: 'Cutting-edge hardware and accessories designed for daily operational efficiency.', 
-    icon: Cpu 
-  };
+  return (
+    meta[category] || {
+      subtitle: "Nova Systems",
+      desc: "Cutting-edge hardware and accessories designed for daily operational efficiency.",
+      icon: Cpu,
+    }
+  );
 };
 
 export default function Collections() {
-  const displayCategories = categories.filter(c => c !== 'All');
+  const displayCategories = categories.filter((c) => c !== "All");
 
   return (
     <PageLayout>
@@ -61,12 +70,35 @@ export default function Collections() {
             >
               The Collections
             </motion.h1>
+
+            <svg
+              className="absolute -bottom-2 left-0 w-full h-1 overflow-visible"
+              viewBox="0 0 100 1"
+              preserveAspectRatio="none"
+            >
+              <motion.path
+                d="M 0,0.5 L 100,0.5"
+                fill="transparent"
+                stroke="hsl(var(--nova-blue))"
+                strokeWidth="2"
+                strokeLinecap="round"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
+                transition={{
+                  delay: 0.5,
+                  duration: 1.2,
+                  ease: "easeInOut",
+                }}
+              />
+            </svg>
           </header>
 
           <div className="space-y-12">
             {displayCategories.map((category, i) => {
               const meta = getCategoryMeta(category);
-              const coverProduct = products.find(p => p.category === category);
+              const coverProduct = products.find(
+                (p) => p.category === category,
+              );
 
               return (
                 <motion.div
@@ -81,11 +113,18 @@ export default function Collections() {
                   <div className="p-8 lg:p-16 flex flex-col justify-center space-y-6">
                     <div className="flex items-center gap-4">
                       <div className="p-3 rounded-xl bg-[hsl(var(--nova-bg))] border border-[hsl(var(--nova-border))] group-hover:border-[hsl(var(--nova-blue)/0.3)] transition-colors">
-                        <meta.icon size={24} className="text-[hsl(var(--nova-blue))]" />
+                        <meta.icon
+                          size={24}
+                          className="text-[hsl(var(--nova-blue))]"
+                        />
                       </div>
                       <div>
-                        <p className="text-[10px] uppercase tracking-widest text-[hsl(var(--nova-muted))]">{meta.subtitle}</p>
-                        <h2 className="text-3xl font-bold text-[hsl(var(--nova-text))]">{category}</h2>
+                        <p className="text-[10px] uppercase tracking-widest text-[hsl(var(--nova-muted))]">
+                          {meta.subtitle}
+                        </p>
+                        <h2 className="text-3xl font-bold text-[hsl(var(--nova-text))]">
+                          {category}
+                        </h2>
                       </div>
                     </div>
 
